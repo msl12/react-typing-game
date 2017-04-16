@@ -6,6 +6,10 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/msl12/react-typing-game"
+  },
   "devDependencies": {
     "react-scripts": "0.9.5"
   },
