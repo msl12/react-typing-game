@@ -5,8 +5,8 @@ a simple game to practice typing.
 ## Install
 
 ```
-git clone https://github.com/msl12/hold-on-30-seconds.git
-cd hold-on-30-seconds/
+git clone https://github.com/msl12/react-typing-game.git
+cd react-typing-game/
 npm install
 npm start
 ```
@@ -14,3 +14,5 @@ npm start
 Then open http://localhost:3000/ and have fun!
 
 ## Screenshot
+
+![screenshot](http://on1m9iap9.bkt.gdipper.com/images/react-typing-game.png)
