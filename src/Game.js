@@ -6,6 +6,7 @@ var waitedForTyped = null;
 var waitedTypedIndex = null;
 var typeAudio = new Audio("http://jsdx.sc.chinaz.com/Files/DownLoad/sound1/201607/7571.mp3");
 var pressButtonAudio = new Audio("https://d1490khl9dq1ow.cloudfront.net/sfx/mp3preview/ibm-computer-keyboard-press-enter-key_GJE0qjEd.mp3");
+var timer = null;
 
 class Game extends React.Component {
   constructor(props) {
@@ -14,12 +15,32 @@ class Game extends React.Component {
     this.state = {
       gameState: 0,
       score: 0,
-      word: ""
+      word: "",
+      timeLeft: 0
     };
 
     this.handleClickButton = this.handleClickButton.bind(this);
     this.typing = this.typing.bind(this);
     this.loseGame = this.loseGame.bind(this);
+  }
+
+  calculateTime() {
+    clearInterval(timer);
+
+    this.setState({
+      timeLeft: 2
+    });
+
+    timer = setInterval(() => {
+      var timeLeft = this.state.timeLeft - 1;
+      this.setState({
+        timeLeft: timeLeft
+      });
+
+      if (timeLeft <= 0) {
+        this.loseGame();
+      }
+    }, 1000);
   }
 
   handleClickButton(e) {
@@ -77,6 +98,8 @@ class Game extends React.Component {
 
   generateWord() {
     this.resetSpans();
+    this.calculateTime();
+
     var random = Math.floor((Math.random() * wordsList.length)); 
     var word = wordsList[random];
     this.setState({
@@ -90,6 +113,7 @@ class Game extends React.Component {
   loseGame() {
     alert("man, you lose..");
     window.removeEventListener("keydown", this.typing);
+    clearInterval(timer);
 
     this.setState({
       gameState: 0
@@ -116,8 +140,16 @@ class Game extends React.Component {
         <p className="comment">Type fastly!</p>
         <button onClick={this.handleClickButton}>START</button>
 
-        <div className="score-wrap">
-          Score:<span className="score">{this.state.score}</span>
+        <div className="outer-wrap">
+          <div className="row">
+            <div className="score-wrap">
+              Score:<span className="score">{this.state.score}</span>
+            </div>
+              
+            <div className="time-wrap">
+              Time left:<span className="time">{this.state.timeLeft}</span>
+            </div>
+          </div>
         </div>
 
         <div className="words-wrap">
