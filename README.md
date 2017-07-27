@@ -7,7 +7,7 @@ a simple game to practice typing.
 ```
 git clone https://github.com/msl12/react-typing-game.git
 cd react-typing-game/
-npm install
+yarn install
 npm start
 ```
 
